@@ -1,6 +1,8 @@
 package com.adepuu.exercises.session5;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Exercise7 {
     /**
@@ -16,25 +18,56 @@ public class Exercise7 {
      */
     public static void main(String[] args) {
         Solution7 solution7 = new Solution7();
-        solution7.numOfDays();
+        boolean result = solution7.Anagram();
+        System.out.println(result);
     }
 }
 
 class Solution7 {
-    public void numOfDays() {
-        int[] input = {73,74,75,71,69,72,76,73};
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i < input.length; i++ ) {
-            int counter = 0;
-            for (int j = i + 1; j < input.length; j++) {
-                if (input[i] < input[j]) {
-                    counter++;
-                    break;
-                }
-                counter++;
+    public boolean Anagram() {
+        String input = "anagram";
+        String target = "nagaram";
+        char[] inputChars = input.toCharArray();
+        char[] targetChars = target.toCharArray();
+
+        HashMap<Character, Integer> inputHash = new HashMap<Character, Integer>();
+        for (char c: inputChars) {
+            if (!inputHash.containsKey(c)) {
+                inputHash.put(c, 1);
+            } else {
+                Integer freq = inputHash.get(c);
+                freq++;
+                inputHash.put(c, freq);
             }
-            arrayList.add(counter);
         }
-        System.out.println(arrayList);
+
+        HashMap<Character, Integer> targetHash = new HashMap<Character, Integer>();
+        for (char c: targetChars) {
+            if (!inputHash.containsKey(c)){
+                return false;
+            }
+            if (!targetHash.containsKey(c)){
+                targetHash.put(c, 1);
+            } else {
+                int freq = targetHash.get(c);
+                freq++;
+                targetHash.put(c, freq);
+            }
+        }
+
+        if (inputHash.size() != targetHash.size()) {
+            return false;
+        }
+
+        for (Map.Entry<Character, Integer> entry: inputHash.entrySet()) {
+            Character key = entry.getKey();
+            Integer value = entry.getValue();
+            Integer targetValue = inputHash.get(key);
+
+            if (!value.equals(targetValue)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

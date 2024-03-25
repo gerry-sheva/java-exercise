@@ -1,22 +1,29 @@
 package com.adepuu.exercises.session5;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Exercise2 {
     public static void main(String[] args) {
         Solution2 solution2 = new Solution2();
-        boolean result = solution2.findDuplicate();
-        System.out.println(result);
+        ArrayList<Integer> array = solution2.arrayRotation();
+        System.out.println(array);
     }
 }
 
 class Solution2 {
-    public boolean findDuplicate() {
-        int[] input = {1,2,1,3,4};
-        Quicksort.quickSort(input, 0, input.length - 1);
-        for (int i = 1; i < input.length; i++) {
-            if (input[i] == input[i - 1]) {
-                return true;
-            }
+    public ArrayList<Integer> arrayRotation() {
+        int[] array = {1,2,3,4,5,6,7};
+        int d = 2;
+        int[] right = Arrays.copyOfRange(array, 0, d);
+        int[] left = Arrays.copyOfRange(array, d, array.length-1);
+        ArrayList<Integer> combined = new ArrayList<>();
+        for (int i : left) {
+            combined.add(i);
         }
-        return false;
+        for (int i : right) {
+            combined.add(i);
+        }
+        return combined;
     }
 }

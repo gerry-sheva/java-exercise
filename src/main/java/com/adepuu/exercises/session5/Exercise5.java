@@ -1,61 +1,57 @@
 package com.adepuu.exercises.session5;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Exercise5 {
     public static void main(String[] args) {
         Solution5 solution5 = new Solution5();
-        boolean result = solution5.Anagram();
-        System.out.println(result);
+        solution5.sort();
     }
 }
 
 class Solution5 {
-    public boolean Anagram() {
-        String input = "anagram";
-        String target = "nagaram";
-        char[] inputChars = input.toCharArray();
-        char[] targetChars = target.toCharArray();
-
-        HashMap<Character, Integer> inputHash = new HashMap<Character, Integer>();
-        for (char c: inputChars) {
-            if (!inputHash.containsKey(c)) {
-                inputHash.put(c, 1);
-            } else {
-                Integer freq = inputHash.get(c);
-                freq++;
-                inputHash.put(c, freq);
-            }
+    public void sort() {
+        int[] input = {1,1,9,1,3,3,5,4,3,2,4,2};
+        String direction = "asc";
+        if (direction.equals("asc")) {
+            Quicksort.quickSort(input, 0, input.length - 1);
+            System.out.println(Arrays.toString(input));
+        } else {
+            ReversedQuicksort.quickSort(input, 0, input.length - 1);
+            System.out.println(Arrays.toString(input));
         }
 
-        HashMap<Character, Integer> targetHash = new HashMap<Character, Integer>();
-        for (char c: targetChars) {
-            if (!inputHash.containsKey(c)){
-                return false;
-            }
-            if (!targetHash.containsKey(c)){
-                targetHash.put(c, 1);
-            } else {
-                int freq = targetHash.get(c);
-                freq++;
-                targetHash.put(c, freq);
-            }
-        }
+    }
+}
 
-        if (inputHash.size() != targetHash.size()) {
-            return false;
-        }
+class ReversedQuicksort {
+    static int partition(int array[], int low, int high) {
+        int pivot = array[high];
 
-        for (Map.Entry<Character, Integer> entry: inputHash.entrySet()) {
-            Character key = entry.getKey();
-            Integer value = entry.getValue();
-            Integer targetValue = inputHash.get(key);
+        int i = (low - 1);
 
-            if (!value.equals(targetValue)) {
-                return false;
+        for (int j = low; j < high; j++) {
+            if (array[j] >= pivot) {
+                i++;
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
+
         }
-        return true;
+        int temp = array[i + 1];
+        array[i + 1] = array[high];
+        array[high] = temp;
+        return (i + 1);
+    }
+
+    static void quickSort(int array[], int low, int high) {
+        if (low < high) {
+            int pi = partition(array, low, high);
+            quickSort(array, low, pi - 1);
+            quickSort(array, pi + 1, high);
+        }
     }
 }
