@@ -10,7 +10,7 @@ public class Exercise2 {
 
 class Solution2 {
     public boolean findDuplicate() {
-        int[] input = {1,2,3,4};
+        int[] input = {1,2,1,3,4};
         Quicksort.quickSort(input, 0, input.length - 1);
         for (int i = 1; i < input.length; i++) {
             if (input[i] == input[i - 1]) {
