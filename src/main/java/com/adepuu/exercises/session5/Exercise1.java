@@ -15,6 +15,7 @@ class Solution {
         int[] input = {7,2,5,1,4};
         int size = input.length;
         Quicksort.quickSort(input, 0, size - 1);
+        System.out.println(Arrays.toString(input));
         return input[size-1];
     }
 
