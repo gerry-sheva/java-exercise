@@ -6,36 +6,40 @@ import java.util.Map;
 public class Exercise5 {
     public static void main(String[] args) {
         Solution5 solution5 = new Solution5();
-        boolean result = solution5.anagram();
+        boolean result = solution5.Anagram();
         System.out.println(result);
     }
 }
 
 class Solution5 {
-    public boolean anagram() {
+    public boolean Anagram() {
         String input = "anagram";
         String target = "nagaram";
+        char[] inputChars = input.toCharArray();
+        char[] targetChars = target.toCharArray();
 
         HashMap<Character, Integer> inputHash = new HashMap<Character, Integer>();
-        for (int i = 0; i < input.length(); i++) {
-            if (inputHash.containsKey(input.charAt(i))){
-                inputHash.put(input.charAt(i), 1);
+        for (char c: inputChars) {
+            if (!inputHash.containsKey(c)) {
+                inputHash.put(c, 1);
             } else {
-                Integer freq = inputHash.get(input.charAt(i)) + 1;
-                inputHash.put(input.charAt(i), freq);
+                Integer freq = inputHash.get(c);
+                freq++;
+                inputHash.put(c, freq);
             }
         }
 
         HashMap<Character, Integer> targetHash = new HashMap<Character, Integer>();
-        for (int i = 0; i < target.length(); i++) {
-            if (!inputHash.containsKey(target.charAt(i))){
+        for (char c: targetChars) {
+            if (!inputHash.containsKey(c)){
                 return false;
             }
-            if (targetHash.containsKey(target.charAt(i))){
-                targetHash.put(target.charAt(i), 1);
+            if (!targetHash.containsKey(c)){
+                targetHash.put(c, 1);
             } else {
-                int freq = targetHash.get(target.charAt(i)) + 1;
-                targetHash.put(target.charAt(i), freq);
+                int freq = targetHash.get(c);
+                freq++;
+                targetHash.put(c, freq);
             }
         }
 
