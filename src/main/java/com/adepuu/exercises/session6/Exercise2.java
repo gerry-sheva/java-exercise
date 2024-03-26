@@ -9,10 +9,7 @@ public class Exercise2 {
      * and handle all edge cases using try-catch-finally based on the logic given
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean isDone = false;
-
-        try {
+        try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Enter the file name: ");
             String fileName = scanner.nextLine();
             readFileContents(fileName);
@@ -24,9 +21,6 @@ public class Exercise2 {
             System.out.println("Something went wrong during reading the file");
         } catch (Exception e) {
             System.out.println("System error! Please try again later");
-        }
-        finally {
-            scanner.close();
         }
 
     }
