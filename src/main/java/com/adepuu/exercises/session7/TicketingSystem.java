@@ -19,6 +19,8 @@ public class TicketingSystem {
      * Start your project from the main method below ;) have fun!
      */
     public static void main(String[] args) {
-
+        Booth booth = new Booth();
+        Ticket ticket = booth.bookTicket();
+        booth.validateTicket(ticket);
     }
 }
