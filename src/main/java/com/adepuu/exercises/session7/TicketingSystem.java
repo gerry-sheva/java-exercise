@@ -21,15 +21,17 @@ public class TicketingSystem {
     public static void main(String[] args) {
         Event fest = new Event("Festival", 200);
         Event expo = new Event("Expo", 1000);
-        Event nullFest = new Event("NullFest", 0);
+        Event nullFest = new Event("NullFest", 1);
         Event[] events = {fest, expo, nullFest};
         Booth booth = new Booth(events);
         Ticket ticket = booth.bookTicket(fest, "Shevaaa");
         Ticket ticket1 = booth.bookTicket(expo, "Shevaaa");
         Ticket ticket2 = booth.bookTicket(nullFest, "Shevaaa");
-        booth.validateTicket(fest, ticket);
-        booth.validateTicket(expo, ticket1);
-        booth.validateTicket(nullFest, ticket2);
+        Ticket ticket3 = booth.bookTicket(nullFest, "Shheeee");
+        booth.validateTicket(ticket);
+        booth.validateTicket(ticket1);
+        booth.validateTicket(ticket2);
+        booth.validateTicket(ticket3);
         System.out.println(Ticket.getSales());
     }
 }

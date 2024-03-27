@@ -15,7 +15,7 @@ public class Ticket implements Ticketable{
             this.event = event;
             this.name = name;
             sales++;
-//            event.setCapacity(event.getCapacity() - 1);
+            event.setCapacity(event.getCapacity() - 1);
         }
 
     }
