@@ -19,8 +19,17 @@ public class TicketingSystem {
      * Start your project from the main method below ;) have fun!
      */
     public static void main(String[] args) {
-        Booth booth = new Booth();
-        Ticket ticket = booth.bookTicket();
-        booth.validateTicket(ticket);
+        Event fest = new Event("Festival", 200);
+        Event expo = new Event("Expo", 1000);
+        Event nullFest = new Event("NullFest", 0);
+        Event[] events = {fest, expo, nullFest};
+        Booth booth = new Booth(events);
+        Ticket ticket = booth.bookTicket(fest, "Shevaaa");
+        Ticket ticket1 = booth.bookTicket(expo, "Shevaaa");
+        Ticket ticket2 = booth.bookTicket(nullFest, "Shevaaa");
+        booth.validateTicket(fest, ticket);
+        booth.validateTicket(expo, ticket1);
+        booth.validateTicket(nullFest, ticket2);
+        System.out.println(Ticket.getSales());
     }
 }

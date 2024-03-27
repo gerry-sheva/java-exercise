@@ -4,21 +4,28 @@ import java.util.UUID;
 
 public class Ticket implements Ticketable{
     private UUID id;
-    private String event;
+    private Event event;
     private String name;
-    private int price;
 
-    private static int slot = 0;
+    private static int sales = 0;
 
-    public Ticket(UUID id, String event, String name, int price) {
-        if (slot != 0) {
+    public Ticket(UUID id, Event event, String name) {
+        if (event.getCapacity() > 0) {
             this.id = id;
             this.event = event;
             this.name = name;
-            this.price = price;
-            slot--;
+            sales++;
+//            event.setCapacity(event.getCapacity() - 1);
         }
 
+    }
+
+    public static int getSales() {
+        return sales;
+    }
+
+    public static void setSales(int sales) {
+        Ticket.sales = sales;
     }
 
     public UUID getId() {
@@ -29,11 +36,11 @@ public class Ticket implements Ticketable{
         this.id = id;
     }
 
-    public String getEvent() {
+    public Event getEvent() {
         return event;
     }
 
-    public void setEvent(String event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
 
@@ -44,15 +51,6 @@ public class Ticket implements Ticketable{
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     @Override
     public String toString() {
         return "ID: " + this.getId().toString() + "\nEvent: " + this.getEvent() + "\nName: " + this.getName();

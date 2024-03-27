@@ -5,23 +5,26 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Booth {
-    HashMap<String, Integer> slots;
     HashMap<String, ArrayList<UUID>> db;
 
-    public Booth() {
-        this.db = new HashMap<>() {{put("Radiohead", new ArrayList<UUID>());}};
+    public Booth(Event[] events) {
+        this.db = new HashMap<>();
+        for (Event e: events) {
+            db.put(e.getName(), new ArrayList<>());
+        }
     }
 
-    public Ticket bookTicket() {
+
+    public Ticket bookTicket(Event event, String name) {
         UUID uuid = UUID.randomUUID();
-        Ticket ticket = new Ticket(uuid, "Radiohead", "Sheva", 90);
-        ArrayList<UUID> booked = db.get("Radiohead");
+        Ticket ticket = new Ticket(uuid, event, name);
+        ArrayList<UUID> booked = db.get(event.getName());
         booked.add(uuid);
         return ticket;
     }
 
-    public void validateTicket(Ticket ticket) {
-        ArrayList<UUID> tickets = db.get("Radiohead");
+    public void validateTicket(Event event,Ticket ticket) {
+        ArrayList<UUID> tickets = db.get(event.getName());
         if (tickets.contains(ticket.getId())) {
             System.out.println(ticket);
             System.out.println("Enjoy your show!");
