@@ -57,11 +57,20 @@ public class Menu {
             for (Todo todo: todoList.getTodos()) {
                 System.out.println(todo.getMessage());
             }
-            choices();
+            isLoggedIn = choices();
+            if (!isLoggedIn) {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("quit?");
+                String input = scanner.nextLine();
+                if (input.equals("y")) {
+                    isRunning = false;
+                    break;
+                }
+            }
         }
     }
 
-    public void choices() {
+    public boolean choices() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Input 'add' to add task");
@@ -69,7 +78,12 @@ public class Menu {
             if (choice.equals("add")) {
 //                add todo
                 user.addTodo();
+                break;
+            } else if (choice.equals("logout")) {
+                user = null;
+                return false;
             }
+
         }
 
     }
