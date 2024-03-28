@@ -8,7 +8,16 @@ enum STATUS {
 }
 public class Todo {
     private String message;
-    private STATUS status;
+    public Todo(String message) {
+        this.message = message;
+    }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
 }

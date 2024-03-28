@@ -16,6 +16,10 @@ public class User {
         this.todoList = new TodoList();
     }
 
+    public void addTodo() {
+        todoList.addTodo();
+    }
+
     public String getId() {
         return id;
     }
