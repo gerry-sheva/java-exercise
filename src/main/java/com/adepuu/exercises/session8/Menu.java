@@ -70,7 +70,7 @@ public class Menu {
         }
     }
 
-    public boolean choices() {
+    private boolean choices() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Input 'add' to add task");
@@ -85,6 +85,6 @@ public class Menu {
             }
 
         }
-
+        return true;
     }
 }
