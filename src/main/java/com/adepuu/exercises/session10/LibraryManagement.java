@@ -1,5 +1,7 @@
 package com.adepuu.exercises.session10;
 
+import java.util.ArrayList;
+
 public class LibraryManagement {
     /**
      * Acceptance Criteria:
@@ -14,6 +16,27 @@ public class LibraryManagement {
      * - Make sure to implement Inheritance and Polymorphism properly
      */
     public static void main(String[] args) {
+//        Book
+        Books book1 = new Books(50, 200, "Divine Comedy", "Dante Alighieri");
+        book1.borrowItem();
+        book1.borrowItem();
+        book1.returnItem();
+//        Ebook
+        Ebooks ebook1 = new Ebooks(3, 500, "Lord of the Flies", "William Golding" ,"Link to Lord of the Flies");
+        ebook1.borrowItem();
+        ebook1.borrowItem();
+        ebook1.borrowItem();
+        ebook1.borrowItem();
 
+        System.out.println("/////////////");
+
+        ArrayList<Materials> arrList = new ArrayList<>();
+        arrList.add(book1);
+        arrList.add(ebook1);
+
+        for (Materials m : arrList) {
+            m.printStatus();
+        }
     }
+
 }
