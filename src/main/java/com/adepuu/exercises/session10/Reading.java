@@ -34,7 +34,7 @@ public abstract class Reading implements Materials{
     }
     @Override
     public void printStatus() {
-        System.out.printf("Title: %s", this.title);
+        System.out.printf("Title: %s\n", this.title);
         System.out.printf("Stock: %d\n", this.stock);
         System.out.printf("Borrowed: %d\n", this.borrowed);
     }
