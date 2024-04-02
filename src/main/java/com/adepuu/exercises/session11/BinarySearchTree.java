@@ -1,5 +1,7 @@
 package com.adepuu.exercises.session11;
 
+import java.util.Scanner;
+
 public class BinarySearchTree {
     /**
      * Write a Java binary search tree program that can scale dynamically
@@ -20,6 +22,59 @@ public class BinarySearchTree {
      *
      */
     public static void main(String[] args) {
+        controller();
+    }
 
+    public static void controller() {
+        Scanner scanner = new Scanner(System.in);
+        boolean repeat = true;
+        System.out.println("Input the size of your array: ");
+        int size = scanner.nextInt();
+        int[] array = new int[size];
+        while (repeat) {
+            System.out.println("Input the number that you want to insert: (-1 to quit)");
+            int num = scanner.nextInt();
+            if (num == -1) {
+                repeat = false;
+            }
+        }
+        System.out.println("Input the number that you want to search: ");
+        int target = scanner.nextInt();
+        System.out.println(search(array, 0, array.length - 1, target));
+    }
+
+    public static boolean search(int[] nums, int lo, int hi, int target) {
+        int mid = (lo + hi) / 2;
+        if (target == nums[mid]) {
+            return true;
+        }
+        if (lo < hi) {
+            if (target < nums[mid]) {
+                return search(nums, lo, mid - 1, target);
+            } else if (target > nums[mid]){
+                return search(nums, mid + 1, hi, target);
+            }
+        }
+        return false;
+    }
+
+    public static int searchIndex(int[] nums, int lo, int hi, int target) {
+        int mid = (lo + hi) / 2;
+        if (target == nums[mid]) {
+            return mid;
+        }
+        if (lo < hi) {
+            if (target < nums[mid]) {
+                return searchIndex(nums, lo, mid - 1, target);
+            } else if (target > nums[mid]){
+                return searchIndex(nums, mid + 1, hi, target);
+            }
+        }
+        System.out.println(nums[mid]);
+        if (target > nums[mid]) {
+            return mid+1;
+        } else if (mid > 0) {
+            return mid;
+        } else return 0;
     }
 }
