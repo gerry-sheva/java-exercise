@@ -27,16 +27,18 @@ public class BinarySearchTree {
 
     public static void controller() {
         Scanner scanner = new Scanner(System.in);
-        boolean repeat = true;
         System.out.println("Input the size of your array: ");
         int size = scanner.nextInt();
         int[] array = new int[size];
-        while (repeat) {
+        int counter = 0;
+        while (counter < size) {
             System.out.println("Input the number that you want to insert: (-1 to quit)");
             int num = scanner.nextInt();
             if (num == -1) {
-                repeat = false;
+                break;
             }
+            array[searchIndex(array, 0, array.length - 1, num)] = num;
+            counter++;
         }
         System.out.println("Input the number that you want to search: ");
         int target = scanner.nextInt();
@@ -70,11 +72,10 @@ public class BinarySearchTree {
                 return searchIndex(nums, mid + 1, hi, target);
             }
         }
-        System.out.println(nums[mid]);
         if (target > nums[mid]) {
-            return mid+1;
-        } else if (mid > 0) {
             return mid;
+        } else if (mid > 0) {
+            return mid - 1;
         } else return 0;
     }
 }
