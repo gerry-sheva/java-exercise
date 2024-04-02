@@ -1,5 +1,6 @@
 package com.adepuu.exercises.session11;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BinarySearchTree {
@@ -37,7 +38,7 @@ public class BinarySearchTree {
             if (num == -1) {
                 break;
             }
-            array[searchIndex(array, 0, array.length - 1, num)] = num;
+            insert(array, num);
             counter++;
         }
         System.out.println("Input the number that you want to search: ");
@@ -68,11 +69,19 @@ public class BinarySearchTree {
 //            Some number already exist
             if (target > nums[index]) {
 //                somehow shift the elements to the left
+                for (int i = 0; i < index; i++) {
+                    nums[i] = nums[i+1];
+                }
+                nums[index] = target;
             } else if (target < nums[index]) {
 //                somehow shift the elemtent to the right
+                for (int i = nums.length - 1; i > index; i--) {
+                    nums[i] = nums[i-1];
+                }
+                nums[index] = target;
             }
         }
-
+        System.out.println(Arrays.toString(nums));
     }
 
     public static int searchIndex(int[] nums, int lo, int hi, int target) {
