@@ -19,7 +19,7 @@ public class Queue {
      * - Error Handling: The program should handle edge cases gracefully, such as attempting to dequeue an element from an empty queue, and provide clear error messages.
      */
     public static void main(String[] args) {
-        QueueType queue = new QueueType();
+        QueueSheva queue = new QueueSheva();
         queue.enqueue(6);
         queue.enqueue(90);
         System.out.println(queue.peek());
@@ -30,6 +30,52 @@ public class Queue {
         queue.dequeue();
         queue.dequeue();
         queue.peek();
+    }
+
+    private static class QueueSheva {
+        Node head;
+
+        private static class Node {
+            int data;
+            Node next;
+
+            Node(int data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public void enqueue(int i) {
+            Node node = new Node(i);
+            Node current = head;
+            if (current == null) {
+                head = node;
+            } else {
+                while (current.next != null) {
+                    current = current.next;
+                }
+                current.next = node;
+            }
+        }
+
+        public void dequeue() {
+            if (head.next != null) {
+                head = head.next;
+            } else {
+                System.out.println("The queue is empty");
+            }
+
+
+        }
+
+        public int peek() {
+            if (head != null) {
+                return head.data;
+            } else {
+                System.out.println("The queue is empty");
+                return -1;
+            }
+        }
     }
 }
 

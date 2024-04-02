@@ -18,20 +18,20 @@ public class Stack {
      * - Error Handling: The program should handle edge cases gracefully, such as attempting to pop an element from an empty stack, and provide clear error messages.
      */
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
-        System.out.println(list.peek());
-        list.push(5);
-        list.push(55);
-        System.out.println(list.peek());
-        list.pop();
-        System.out.println(list.peek());
-        list.pop();
-        System.out.println(list.peek());
-        list.pop();
-        System.out.println(list.peek());
+        StackSheva stack = new StackSheva();
+        System.out.println(stack.peek());
+        stack.push(5);
+        stack.push(55);
+        System.out.println(stack.peek());
+        stack.pop();
+        System.out.println(stack.peek());
+        stack.pop();
+        System.out.println(stack.peek());
+        stack.pop();
+        System.out.println(stack.peek());
     }
 
-    private static class LinkedList {
+    private static class StackSheva {
         private Node head;
 
         private static class Node {
