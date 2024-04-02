@@ -1,5 +1,7 @@
 package com.adepuu.exercises.session11;
 
+import java.util.LinkedList;
+
 public class Stack {
     /**
      * Write a Java stack program that can scale dynamically
@@ -16,6 +18,37 @@ public class Stack {
      * - Error Handling: The program should handle edge cases gracefully, such as attempting to pop an element from an empty stack, and provide clear error messages.
      */
     public static void main(String[] args) {
+        StackType stackType = new StackType();
+        stackType.pop();
+    }
+}
 
+class StackType {
+    LinkedList<Integer> stack;
+
+    public StackType() {
+        this.stack = new LinkedList<>();
+    }
+
+    public void push(Integer i) {
+        this.stack.addLast(i);
+    }
+
+    public void pop() {
+        if (!this.stack.isEmpty()) {
+            this.stack.removeLast();
+        } else {
+            System.out.println("Stack is currently empty!");
+        }
+
+    }
+
+    public Integer peek() {
+        if (!this.stack.isEmpty()) {
+            return this.stack.getLast();
+        } else {
+            System.out.println("Stack is currently empty!");
+            return -1;
+        }
     }
 }
