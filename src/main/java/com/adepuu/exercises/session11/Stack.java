@@ -18,8 +18,65 @@ public class Stack {
      * - Error Handling: The program should handle edge cases gracefully, such as attempting to pop an element from an empty stack, and provide clear error messages.
      */
     public static void main(String[] args) {
-        StackType stackType = new StackType();
-        stackType.pop();
+        LinkedList list = new LinkedList();
+        list.push(5);
+        list.push(55);
+        System.out.println(list.peek());
+        list.pop();
+        System.out.println(list.peek());
+    }
+
+    private static class LinkedList {
+        private Node head;
+
+        private static class Node {
+            int data;
+            Node next;
+
+            Node(int data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        public void push(int i) {
+            Node node = new Node(i);
+            Node last = head;
+            if (head == null) {
+                head = node;
+            } else {
+                while (last.next != null) {
+                    last = last.next;
+                }
+                last.next = node;
+            }
+        }
+
+        public void pop() {
+            Node current = head;
+            if (current == null) {
+                System.out.println("The stack is empty");
+            } else {
+                while (current.next.next != null) {
+                    current = current.next;
+                }
+                current.next = null;
+            }
+        }
+
+        public int peek() {
+            Node current = head;
+            if (current == null) {
+                System.out.println("The stack is empty");
+                return -1;
+            } else {
+                while (current.next != null) {
+                    current = current.next;
+                }
+                return current.data;
+            }
+
+        }
     }
 }
 
