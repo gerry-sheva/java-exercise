@@ -19,8 +19,13 @@ public class Stack {
      */
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
+        System.out.println(list.peek());
         list.push(5);
         list.push(55);
+        System.out.println(list.peek());
+        list.pop();
+        System.out.println(list.peek());
+        list.pop();
         System.out.println(list.peek());
         list.pop();
         System.out.println(list.peek());
@@ -56,11 +61,17 @@ public class Stack {
             Node current = head;
             if (current == null) {
                 System.out.println("The stack is empty");
+            } else if (current.next == null) {
+                head = null;
             } else {
-                while (current.next.next != null) {
+                while (current.next != null) {
+                    if (current.next.next == null) {
+                        current.next = null;
+                        return;
+                    }
                     current = current.next;
                 }
-                current.next = null;
+
             }
         }
 
