@@ -60,6 +60,21 @@ public class BinarySearchTree {
         return false;
     }
 
+    public static void insert(int[] nums, int target) {
+        int index = searchIndex(nums, 0, nums.length - 1, target);
+        if (nums[index] == 0 && index != 0) {
+            nums[index] = target;
+        } else {
+//            Some number already exist
+            if (target > nums[index]) {
+//                somehow shift the elements to the left
+            } else if (target < nums[index]) {
+//                somehow shift the elemtent to the right
+            }
+        }
+
+    }
+
     public static int searchIndex(int[] nums, int lo, int hi, int target) {
         int mid = (lo + hi) / 2;
         if (target == nums[mid]) {
