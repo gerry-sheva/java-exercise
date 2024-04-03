@@ -1,105 +1,71 @@
 package com.adepuu.exercises.session11;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BinarySearchTree {
-    /**
-     * Write a Java binary search tree program that can scale dynamically
-     * <p>
-     * As a user, I want to insert N-numbers into a binary search tree and then search for a specific number. After searching, the program should prompt me to search for another number without terminating.
-     * <p>
-     * Acceptance Criteria:
-     * - The program should start by prompting the user to enter the number of elements (N) they wish to insert into the binary search tree.
-     * - The program should then prompt the user to enter N numbers one by one.
-     * <p>
-     * Acceptance Criteria:
-     * - The program should correctly insert each number into the binary search tree in a way that maintains the binary search tree properties (all nodes in the left subtree are less than the root, and all nodes in the right subtree are greater than the root).
-     * - The program should handle duplicate numbers appropriately, either by ignoring them or by updating the existing node.
-     * - After inserting all N-numbers, the program should prompt the user to enter a number to search for within the binary search tree.
-     * - The program should perform a binary search to find the entered number, following the binary search tree properties.
-     * - The program should display whether the number is found or not.
-     * - The program should provide a clear and straightforward way for the user to exit the continuous search loop and terminate the program, such as entering a specific keyword or command.
-     *
-     */
-    public static void main(String[] args) {
-        controller();
-    }
 
-    public static void controller() {
+    public static void main(String[] args) {
+        Tree tree = new Tree();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Input the size of your array: ");
+        System.out.println("How many data that you want to input?");
         int size = scanner.nextInt();
-        int[] array = new int[size];
-        int counter = 0;
-        while (counter < size) {
-            System.out.println("Input the number that you want to insert: (-1 to quit)");
-            int num = scanner.nextInt();
-            if (num == -1) {
-                break;
-            }
-            insert(array, num);
-            counter++;
+        for (int i = 0; i < size; i++) {
+            System.out.println("Input your number:");
+            int input = scanner.nextInt();
+            tree.insert(input);
         }
         System.out.println("Input the number that you want to search: ");
         int target = scanner.nextInt();
-        System.out.println(search(array, 0, array.length - 1, target));
+        boolean result = tree.find(target);
+        System.out.println(result);
     }
 
-    public static boolean search(int[] nums, int lo, int hi, int target) {
-        int mid = (lo + hi) / 2;
-        if (target == nums[mid]) {
-            return true;
-        }
-        if (lo < hi) {
-            if (target < nums[mid]) {
-                return search(nums, lo, mid - 1, target);
-            } else if (target > nums[mid]){
-                return search(nums, mid + 1, hi, target);
-            }
-        }
-        return false;
-    }
+    private static class Tree {
+        Node root;
 
-    public static void insert(int[] nums, int target) {
-        int index = searchIndex(nums, 0, nums.length - 1, target);
-        if (nums[index] == 0 && index != 0) {
-            nums[index] = target;
-        } else {
-//            Some number already exist
-            if (target > nums[index]) {
-//                somehow shift the elements to the left
-                for (int i = 0; i < index; i++) {
-                    nums[i] = nums[i+1];
-                }
-                nums[index] = target;
-            } else if (target < nums[index]) {
-//                somehow shift the elemtent to the right
-                for (int i = nums.length - 1; i > index; i--) {
-                    nums[i] = nums[i-1];
-                }
-                nums[index] = target;
-            }
-        }
-        System.out.println(Arrays.toString(nums));
-    }
+        public static class Node {
+            int data;
+            Node left;
+            Node right;
 
-    public static int searchIndex(int[] nums, int lo, int hi, int target) {
-        int mid = (lo + hi) / 2;
-        if (target == nums[mid]) {
-            return mid;
-        }
-        if (lo < hi) {
-            if (target < nums[mid]) {
-                return searchIndex(nums, lo, mid - 1, target);
-            } else if (target > nums[mid]){
-                return searchIndex(nums, mid + 1, hi, target);
+            Node(int i) {
+                data = i;
             }
         }
-        if (target > nums[mid]) {
-            return mid;
-        } else if (mid > 0) {
-            return mid - 1;
-        } else return 0;
+
+        public void insert(int i) {
+            root = insertRec(root, i);
+        }
+
+        private Node insertRec(Node root, int key) {
+            if (root == null) {
+                root = new Node(key);
+                return root;
+            }
+
+            if (key < root.data) {
+                root.left = insertRec(root.left, key);
+            } else if (key > root.data) {
+                root.right = insertRec(root.right, key);
+            }
+
+            return root;
+        }
+
+        public boolean find(int target) {
+            return findRec(root, target) != null;
+        }
+
+        private Node findRec(Node root, int target) {
+            if (root == null || root.data == target) {
+                return root;
+            }
+
+            if (target < root.data) {
+                return findRec(root.left, target);
+            }
+
+            return findRec(root.right, target);
+        }
     }
 }
